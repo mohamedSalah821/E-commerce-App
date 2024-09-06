@@ -1,0 +1,51 @@
+
+<div class="w-full lg:w-10/12 mx-auto bg-gray-100 p-5 rounded">
+    <h1 class="font-bold text-xl lg:text-2xl">{{"Shop Cart" |translate}} :</h1>
+
+    @if (myCart?.data?.products?.length !== 0) {
+        <h2 class="text-main font-medium py-2">{{"Total Cart Price" |translate}} : {{myCart?.data?.totalCartPrice}} {{"EGP" |translate}}</h2>
+        <div class="w-full lg:w-11/12 mb-4 flex justify-start">
+            <button class="btn-main w-full lg:w-1/4" [routerLink]="['/checkOut', myCart?.cartId]">{{"Check Out" |translate}}</button>
+        </div>        
+    }
+
+    @for (product of myCart?.data?.products; track $index) {
+        <div class="flex items-center justify-between p-4 border-b">
+            <div class="flex items-center">
+                <img [src]="product?.product?.imageCover" class="w-24 lg:w-40" [alt]="product.product.title">
+                <div class="flex flex-col px-3">
+                    <h2 class="text-lg lg:text-xl">{{product?.product?.title}}</h2>
+                    <p class="text-main py-2">{{"Price" |translate}} : {{product?.price}}</p>
+                    <div class="py-1 flex items-center">
+                        <i class="fa-solid fa-trash-can text-main cursor-pointer" (click)="removeSpecItem(product.product._id)"></i>
+                        <span class="ml-2">{{"Remove" |translate}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-square-plus text-main fa-xl cursor-pointer" (click)="updateQuantity(product.product._id, product.count + 1)"></i>
+                <span>{{product?.count}}</span>
+                <i class="fa-solid fa-square-minus text-main fa-xl cursor-pointer" (click)="updateQuantity(product.product._id, product.count - 1)"></i>
+            </div>
+        </div>
+
+        <hr class="my-4">
+    }
+
+    @empty {
+        <img src="../assets/images/empty cart.png" class="mx-auto w-1/2" alt="Empty Cart">
+        <p class="font-bold text-xl lg:text-2xl text-center text-main">{{"Your Cart Is Empty" |translate}}</p>
+    }
+
+    @if(myCart?.data?.products?.length !== 0) {
+        <button class="btn-sec w-full mt-4" (click)="clearCart()">
+            @if (isLoading) {
+                <i class="fa-solid fa-spinner fa-spin"></i>
+            }
+            @if (!isLoading) {
+                {{"Clear Cart" |translate}}
+            }
+        </button>
+    }
+</div>

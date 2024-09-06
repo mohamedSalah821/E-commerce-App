@@ -1,0 +1,33 @@
+
+<div class="w-full lg:w-10/12 mx-auto bg-gray-100 p-5 rounded">
+    @if (myWishList?.length !== 0) {
+        <h1 class="font-bold text-xl lg:text-2xl py-5">My Wish List :</h1>
+    }
+
+    @for (wish of myWishList; track $index) {
+        <div class="flex items-center justify-between p-4 border-b">
+            <div class="flex items-center">
+                <img [src]="wish.imageCover" class="w-24 lg:w-40" [alt]="wish?.title" [title]="wish.title">
+                <div class="flex flex-col px-3">
+                    <h2 class="font-bold text-lg lg:text-xl">{{wish.title}}</h2>
+                    <p class="text-green-700 py-2 font-bold">Price : {{wish.price}}</p>
+                    <div class="py-1 flex items-center text-red-600">
+                        <i class="fa-solid fa-trash-can cursor-pointer" (click)="removeFromWishList(wish._id)"></i>
+                        <span class="ml-2">{{"Remove" | translate}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn-main w-full lg:w-auto" (click)="addToCart(wish._id)">{{"Add To Cart" | translate}}</button>
+            </div>
+        </div>
+
+        <hr class="my-4">
+    }
+
+    @empty {
+        <img src="./assets/images/empty wishList.jpg" class="rounded-3xl mx-auto w-1/2 lg:w-1/3" alt="empty wishList">
+        <p class="font-bold text-xl lg:text-2xl text-center text-main">{{"No items in your wish list" | translate}}</p>
+    }
+</div>

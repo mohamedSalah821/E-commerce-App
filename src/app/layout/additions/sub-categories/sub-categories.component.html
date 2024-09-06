@@ -1,0 +1,23 @@
+
+ <div class="w-full lg:w-3/4 mx-auto text-main text-center py-4">
+    <h1 class="text-3xl lg:text-4xl font-bold">
+        Subcategories
+    </h1>
+</div>
+
+<div class="w-full lg:w-3/4 mx-auto flex flex-wrap justify-center">
+    @for (sub of subCatData; track $index) {
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-3">
+            <div class="p-4 bg-gray-100 text-center rounded-lg shadow-lg">
+                <p class="font-bold text-xl lg:text-2xl">{{sub.name}}</p>
+            </div>
+        </div>
+    }
+    @empty {
+        <div class="w-full lg:w-3/4 mx-auto p-3 text-center">
+            <div class="p-4 bg-gray-100 text-main rounded-lg shadow-lg">
+                <p class="font-bold text-2xl lg:text-4xl">No Subcategories</p>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,71 @@
+
+<div class="w-full lg:w-10/12 mx-auto py-8 px-4 flex flex-wrap lg:flex-nowrap">
+  <div class="main-image w-full lg:w-3/4 mb-4 lg:mb-0">
+      <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide>
+              <img src="./assets/images/img2.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          <ng-template carouselSlide>
+              <img src="./assets/images/img4.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          <ng-template carouselSlide>
+              <img src="./assets/images/img3.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          <ng-template carouselSlide>
+              <img src="./assets/images/img1.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          <ng-template carouselSlide>
+              <img src="./assets/images/img5.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          <ng-template carouselSlide>
+              <img src="./assets/images/img6.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          <ng-template carouselSlide>
+              <img src="./assets/images/img7.avif" class="w-full" alt="main-slider-1">
+          </ng-template>  
+          
+      </owl-carousel-o>
+  </div>
+
+  <div class="secondary-image w-full lg:w-1/4 flex flex-col">
+      <img src="./assets/images/main-slider-2.jpeg" class="w-full " alt="">
+      <img src="./assets/images/main-slider-3.jpeg" class="w-full" alt="">
+  </div>
+</div>
+
+<div class="w-full lg:w-3/4 mx-auto px-4">
+  <input type="text" [(ngModel)]="searchTerm" placeholder="{{'Search By Title..... Ex: Men`s' |translate}} " class="w-full rounded-lg border-gray-500 my-4 px-3 py-2">
+</div>
+
+<div class="w-full lg:w-10/12 mx-auto px-4">
+  <h1 class="text-main font-bold text-xl lg:text-2xl py-2">{{"All Products" |translate}} :</h1>
+</div>
+
+<div class="w-full lg:w-10/12 mx-auto px-4">
+  <div class="flex flex-wrap">
+      @for (product of productList | filter :searchTerm ; track $index) {
+          <div class="lg:w-1/6 md:w-1/3 sm:w-1/2 w-full p-3" [title]="product.title">
+              <div class="product p-2 flex flex-col justify-between">
+                  <i #wishIcon [ngClass]="{'text-red-600': isInWishList(product._id), 'text-black': !isInWishList(product._id)}" class="fa-solid fa-heart fa-xl py-3" (click)="addToWishList(product._id, wishIcon)"></i>
+                  <div [routerLink]="['/productdetails', product._id]">
+                      <img [src]="product.imageCover" class="w-full" alt="imageCover">
+                      <h2 class="text-main py-1 font-bold">{{ product.category.name | uppercase }}</h2>
+                      <h3>{{ product.title.split(" ", 3).join(" ") }}</h3>
+                      <div class="flex justify-between py-2">
+                          <span>{{ product.price | currency:"EGP " }}</span>
+                          <span>{{ product.ratingsAverage }} <i class="fa-solid fa-star rating-color"></i></span>
+                      </div>
+                  </div>
+                  <button class="btn-main w-full py-1 btn-product" (click)="addProduct(product._id)">
+                      @if (isLoading) {
+                          <i class="fa fa-spin fa-spinner"></i>
+                      }
+                      @if (!isLoading) {
+                          {{"Add To Cart" | translate }}
+                      }
+                  </button>
+              </div>
+          </div>
+      }
+  </div>
+</div>

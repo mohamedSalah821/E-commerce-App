@@ -1,0 +1,78 @@
+
+
+  <div class="lg:w-2/4 md:w-3/4 sm:w-full mx-auto py-8 px-4 lg:px-0 flex flex-wrap lg:flex-nowrap">
+
+    <div class="main w-full lg:w-2/4 px-2">
+        <owl-carousel-o [options]="customOptionsTop">
+            <ng-template carouselSlide>
+                <img src="./assets/images/playstation.jpeg" class="w-full lg:w-2/4" alt="main-slider-1">
+            </ng-template>    
+            <ng-template carouselSlide>
+                <img src="./assets/images/1.jpeg" class="w-full lg:w-2/4" alt="main-slider-4">
+            </ng-template>  
+            <ng-template carouselSlide>
+                <img src="./assets/images/2.jpeg" class="w-full lg:w-2/4" alt="main-slider-5">
+            </ng-template>  
+            <ng-template carouselSlide>
+                <img src="./assets/images/3.jpeg" class="w-full lg:w-2/4" alt="main-slider-5">
+            </ng-template>  
+            <ng-template carouselSlide>
+                <img src="./assets/images/4.jpeg" class="w-full lg:w-2/4" alt="main-slider-5">
+            </ng-template>  
+        </owl-carousel-o>
+    </div>
+
+    <div class="secondary w-full lg:w-2/4 px-4">
+        <img src="./assets/images/one.jpg" class="w-full mb-4" alt="">
+        <img src="./assets/images/two.jpg" class="w-full" alt="">
+    </div>
+</div>
+
+<h2 class=" lg:text-4xl text-2xl text-main text-center my-5 px-4">
+    {{ date | date : "fullDate" }}
+</h2>
+
+<div class="py-6 mx-auto w-full lg:w-11/12 px-4">
+    <h1 class="text-main font-bold text-2xl lg:text-3xl pb-5">{{"Categories" |translate}}:</h1>
+    <owl-carousel-o [options]="customOptionsBottom">
+        @for (img of catImage; track $index) {
+            <ng-template carouselSlide>
+                <div class="w-full flex flex-col items-center px-2">
+                    <img [src]="img.image" class="w-full md:h-60 h-40 mb-2">
+                    <h2 class="text-center font-bold text-black">{{ img.name }}</h2>
+                </div>
+            </ng-template>
+        }
+    </owl-carousel-o>
+</div>
+
+<div class="w-full lg:w-11/12 mx-auto px-4">
+    <h1 class="text-main font-bold text-2xl">{{"Popular Products" |translate}} :</h1>
+</div>
+
+<div class="w-full lg:w-11/12 mx-auto flex flex-wrap px-4">
+    @for (product of productList; track $index) {
+        <div class="lg:w-1/6 md:w-1/3 sm:w-1/2 w-full p-3" [title]="product.title">
+            <div class="product p-2 flex flex-col justify-between">
+                <i #wishIcon [ngClass]="{'text-red-600': isInWishList(product._id), 'text-black': !isInWishList(product._id)}" class="fa-solid fa-heart fa-xl py-3" (click)="addToWishList(product._id, wishIcon)"></i>
+                <div [routerLink]="['/productdetails', product._id]">
+                    <img [src]="product.imageCover" class="w-full" alt="imageCover">
+                    <h2 class="text-main py-1 font-bold">{{ product.category.name | uppercase }}</h2>
+                    <h3>{{ product.title.split(" ", 3).join(" ") }}</h3>
+                    <div class="flex justify-between py-2">
+                        <span>{{ product.price | currency:"EGP " }}</span>
+                        <span>{{ product.ratingsAverage }} <i class="fa-solid fa-star rating-color"></i></span>
+                    </div>
+                </div>
+                <button class="btn-main w-full py-1 btn-product" (click)="addProduct(product._id)">
+                    @if (isLoading) {
+                        <i class="fa fa-spin fa-spinner"></i>
+                    }
+                    @if (!isLoading) {
+                        {{"Add To Cart" | translate}}
+                    }
+                </button>
+            </div>
+        </div>
+    }
+</div>

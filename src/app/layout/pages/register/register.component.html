@@ -1,0 +1,124 @@
+<div class="w-10/12 mx-auto my-2 ">
+    <h2 class="text-main">Register Now:</h2>
+
+    <form class="mt-6" [formGroup]="registerForm" (ngSubmit)="sendData()" >
+
+        @if (errorMessage) {
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            Error : {{ errorMessage }}
+            </div>
+        }
+        <div class="my-3">
+            <label for="name">Name:</label>
+            <input type="text" id="name" class="w-full rounded-lg border-gray-500 mt-2" formControlName="name">
+            
+            @if(registerForm.get('name')?.errors && registerForm.get('name')?.touched){
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    @if (registerForm.get('name')?.getError('required')) {
+                        <p>Name is requird </p>
+                    }
+                    @else if (registerForm.get('name')?.getError('minlength')) {
+                        <p>name must be at least 3 characters </p>
+                    }
+                    @else if (registerForm.get('name')?.getError('maxlength')) {
+                        <p>Max Length : 20 </p>
+                    }
+                </div>
+
+            }
+
+        </div>
+
+        <div class="my-3">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="w-full rounded-lg border-gray-500 mt-2" formControlName="email">
+            
+            @if(registerForm.get('email')?.errors && registerForm.get('email')?.touched){
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    @if (registerForm.get('email')?.getError('required')) {
+                        <p>Email is requird </p>
+                    }
+                    @else if (registerForm.get('email')?.getError('email')) {
+                        <p>Email Invalid  </p>
+                        
+                    }
+                    
+                </div>
+
+            }
+
+
+        </div>
+        
+        <div class="my-3">
+            <label for="phone">phone:</label>
+            <input type="tel" id="phone" class="w-full rounded-lg border-gray-500 mt-2" formControlName="phone">
+            
+            @if(registerForm.get('phone')?.errors && registerForm.get('phone')?.touched){
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    @if (registerForm.get('phone')?.getError('required')) {
+                        <p>phone is requird </p>
+                    }
+                    @else if (registerForm.get('phone')?.getError('pattern')) {
+                        <p>phone Invalid  </p>
+                        
+                    }
+                    
+                </div>
+
+            }
+
+        
+        </div>
+        
+        <div class="my-3 ">
+            <label for="password">Password:</label>
+            <div class="input-container">
+            <input #pass type="password" id="password" class="w-full rounded-lg border-gray-500 mt-2" formControlName="password">
+            <i class="fa-regular fa-eye" [class.hidden]="showPass" (click)="(pass.type='text') ; showPass=true"></i>
+            <i class="fa-solid fa-eye-slash " [class.hidden]="!showPass" (click)="(pass.type='password'); showPass=false"></i>
+            </div>
+
+            @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched){
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    @if (registerForm.get('password')?.getError('required')) {
+                        <p>password is requird </p>
+                    }
+                    @else if (registerForm.get('password')?.getError('pattern')) {
+                        <p>password Invalid  </p>
+                        
+                    }
+                    
+                </div>
+
+            }
+        </div>
+        
+        <div class="my-3">
+
+            <label for="rePassword">rePassword:</label>
+            <div class="input-container">
+
+            <input #rePass type="password" id="rePassword" class="w-full rounded-lg border-gray-500 mt-2" formControlName="rePassword">
+            <i class="fa-regular fa-eye" [class.hidden]="showrePass" (click)="(rePass.type='text') ; showrePass=true"></i>
+            <i class="fa-solid fa-eye-slash " [class.hidden]="!showrePass" (click)="(rePass.type='password'); showrePass=false"></i>
+            </div>
+            
+                @if (registerForm.getError('mismatch') && registerForm.get('rePassword')?.touched) {
+
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <p>Password confirmation is incorrect</p>
+            </div>
+            }
+                
+        </div>
+
+        <button class="btn-main block ms-auto" [disabled]="registerForm.invalid">Register
+            @if (isLoading) 
+            {
+                <i class="fa-solid fa-spin fa-spinner"></i>
+
+            }
+        </button>
+    </form>
+</div>

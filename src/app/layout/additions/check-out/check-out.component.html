@@ -1,0 +1,57 @@
+<div class="w-3/4 mx-auto">
+
+    
+        <form [formGroup]="checkOutForm" (ngSubmit)="checkOutApi()">
+
+            <div class="py-2">
+                <label for="details">Details :</label>
+                <input type="text" id="details" formControlName="details" class="w-full rounded-lg border-gray-500 mt-2">
+                @if (checkOutForm.get('details')?.errors  && checkOutForm.get('details')?.touched) {
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        @if (checkOutForm.get('details')?.getError('required')) {
+                            <span>Details is required</span>
+                        }
+                    </div>
+                }
+            
+            </div>
+
+            <div class="py-2">
+                <label for="phone">Phone :</label>
+                <input type="tel" id="phone" formControlName="phone" class="w-full rounded-lg border-gray-500 mt-2">
+            
+                @if (checkOutForm.get('phone')?.errors  && checkOutForm.get('phone')?.touched) {
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        @if (checkOutForm.get('phone')?.getError('required')) {
+                            <span>Phone is required</span>
+                        }@else if (checkOutForm.get('phone')?.getError('pattern')) {
+                            <span>Phone number is not valid</span>
+                        }
+                    </div>
+                }
+            </div> 
+
+            <div class="py-2">
+                <label for="city">City :</label>
+                <input type="text" id="city" formControlName="city" class="w-full rounded-lg border-gray-500 mt-2">
+                @if (checkOutForm.get('city')?.errors  && checkOutForm.get('city')?.touched) {
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        @if (checkOutForm.get('city')?.getError('required')) {
+                            <span>City is required</span>
+                        }
+                    </div>
+                }
+            
+            
+            </div>
+
+            <button class="btn-main w-full my-3" [disabled]="checkOutForm.invalid">Pay Now
+                @if (isLoding) {
+                    <i class="fa-solid fa-spin fa-spinner"></i>
+                }
+            </button>
+
+        </form>
+   
+
+</div>

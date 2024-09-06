@@ -1,0 +1,15 @@
+
+
+ <h1 class="w-full lg:w-2/4 p-5 mx-auto text-main text-center text-3xl lg:text-4xl font-bold">
+  Brands Details : ⤵
+</h1>
+
+<div class="w-full lg:w-2/4 p-5 mx-auto flex flex-col lg:flex-row items-center justify-between bg-gray-100 gap-5 rounded-lg shadow-md">
+  <div class="text-center lg:text-left">
+      <p class="text-main font-bold text-2xl mb-2">{{brandsData?.name}}</p>
+      <p class="text-gray-700">{{brandsData?.slug}}</p>
+  </div>
+  <div class="flex justify-center lg:justify-end w-full lg:w-1/2">
+      <img [src]="brandsData?.image" alt="Brand Image" class="w-full lg:w-48 h-auto object-contain">
+  </div>
+</div>

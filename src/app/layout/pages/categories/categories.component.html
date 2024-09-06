@@ -1,0 +1,15 @@
+
+<h1 class="text-main font-bold text-4xl text-center py-8">{{"All Categories" |translate}}</h1>
+
+<div class="w-full lg:w-3/4 mx-auto flex flex-wrap justify-center">
+
+    @for (cat of catData; track $index) {
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-3">
+            <div class="product text-center flex flex-col" [routerLink]="['/subCategories', cat._id]">
+                <img [src]="cat.image" class="w-full h-60 object-cover mb-4" alt="categories-images">
+                <h1 class="text-main py-2 font-bold text-xl lg:text-2xl">{{cat.name}}</h1>
+            </div>
+        </div>
+    }
+
+</div>

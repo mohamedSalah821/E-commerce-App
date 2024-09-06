@@ -1,0 +1,109 @@
+
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 right-0 left-0 z-50">
+      <div class="max-w-screen-xl flex max-md:flex-wrap items-center max-md:justify-between mx-auto p-4">
+        <a routerLink="home" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="./assets/images/freshcart-logo.svg" alt="freshcart-logo">
+        </a>
+        <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+        </button>
+        <div class="hidden w-full md:flex md:justify-between" id="navbar-default">
+          @if (islogin) {
+            <ul class="font-medium mx-5 flex items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-5 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li><a routerLink="home" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Home" | translate}}</a></li>
+              <li><a routerLink="product" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Product" | translate}}</a></li>
+              <li><a routerLink="cart" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Cart" | translate}}</a></li>
+              <li><a routerLink="wishList" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Wish List" | translate}}</a></li>
+              <li><a routerLink="categories" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Categories" | translate}}</a></li>
+              <li><a routerLink="brands" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Brands" | translate}}</a></li>
+            </ul>
+          }
+    
+          <ul class="flex gap-3 items-center ms-auto md:flex-row flex-col">
+
+            <div class="flex gap-x-4 py-2">
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=100005599981302&mibextid=ZbWKwL" target="_blank">
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/mohamed_s.sabry?igsh=MXd1a3M5dHJ0c3N0dQ==" target="_blank">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@m0hamedsalah88?_t=8pVC1nvlBAt&_r=1" target="_blank">
+                  <i class="fa-brands fa-tiktok"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/mohamedSalah821" target="_blank">
+                  <i class="fa-brands fa-github"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/mohamed-salah-2a4174264" target="_blank">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+              </li>
+  
+            </div>
+
+            @if (!islogin) {
+              <li>
+                <a routerLink="login" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Login" | translate}}</a>
+              </li>
+              <li>
+                <a routerLink="rgister" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">{{"Register" | translate}}</a>
+              </li>
+            }
+            @if (islogin) {
+
+              <div class="flex gap-x-4 py-2">
+                <li class="relative">
+                  <a routerLink="wishList" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">
+                    <i class="fa-solid fa-heart fa-lg text-red-600"></i>
+                    <div class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{{wishItem}}</div>
+                  </a>
+                </li>
+                <li class="relative">
+                  <a routerLink="cart" routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white" aria-current="page">
+                    <i class="fa-solid fa-cart-shopping fa-lg text-main"></i>
+                    <div class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{{cartItem}}</div>
+                  </a>
+                </li>
+                
+              </div>
+
+              <li>
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="bg-main focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
+                  {{"Select Language" | translate}}
+                  <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li><a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" (click)="changLang('en')">{{"English" | translate}}</a></li>
+                    <li><a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" (click)="changLang('ar')">{{"Arabic" | translate}}</a></li>
+                  </ul>
+                </div>
+              </li>     
+
+              <li>
+                <a routerLinkActive="text-main font-bold" class="block py-2 px-3 text-gray-500 md:p-0 dark:text-white cursor-pointer" (click)="signOut()" aria-current="page">{{"SignOut" | translate}}</a>
+              </li>
+
+
+             
+            }
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
